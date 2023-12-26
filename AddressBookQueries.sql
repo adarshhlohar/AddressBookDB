@@ -78,5 +78,10 @@ update AddressBook set type="Friend" where firstName = "Adarsh";
 -- Use case 10 find the number of friends and family count in address Book
 select type, count(*) as typeCount from AddressBook Group BY type;
 
+-- Adding a person both family and friend
+insert into AddressBook(firstName,lastName,address,city,state,zip,phoneNumber,email,type)
+values("Mahesh","Bhusane","Pune","Pune","Maharashtra",413606,7498234545,"mahesh@gmail.com","Friend"),
+("Mahesh","Bhusane","Pune","Pune","Maharashtra",413606,7498234545,"mahesh1@gmail.com","Family");
+
 select * from TypeTable;
 select * from AddressBook;
