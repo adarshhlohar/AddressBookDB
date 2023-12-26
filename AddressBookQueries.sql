@@ -48,22 +48,7 @@ GROUP BY city, state;
 select * from AddressBook  order by firstName asc;
 
 
--- create table TypeTable(
--- 	Tid int,
---     type varchar(255) not null,
---     foreign key(Tid) references AddressBook(id)
--- );
 
-
--- insert into TypeTable(Tid,type) values(5,'Friend'),
--- (6,'Family'),(7,'Friend'),(8,'Friend'),(9,'Friend');
-
-
-
--- SELECT TypeTable.type,AddressBook.firstName 
--- FROM AddressBook 
--- JOIN TypeTable ON AddressBook.id = TypeTable.Tid 
--- WHERE TypeTable.type = 'Family';
 
 
 -- Use Case 09 identify AddressBook By its name and type
@@ -78,10 +63,33 @@ update AddressBook set type="Friend" where firstName = "Adarsh";
 -- Use case 10 find the number of friends and family count in address Book
 select type, count(*) as typeCount from AddressBook Group BY type;
 
+
+-- Use case 12  Refactoring the code UC-10 is not working
+select TypeTable.type, count(*) as typeCount From AddressBook JOIN TypeTable ON AddressBook.id = TypeTable.Tid  group by TypeTable.type;
+
 -- Adding a person both family and friend
 insert into AddressBook(firstName,lastName,address,city,state,zip,phoneNumber,email,type)
 values("Mahesh","Bhusane","Pune","Pune","Maharashtra",413606,7498234545,"mahesh@gmail.com","Friend"),
 ("Mahesh","Bhusane","Pune","Pune","Maharashtra",413606,7498234545,"mahesh1@gmail.com","Family");
+
+
+
+create table TypeTable(
+	Tid int,
+    type varchar(255) not null,
+    foreign key(Tid) references AddressBook(id)
+);
+
+ALTER TABLE AddressBook
+DROP COLUMN type;
+
+insert into TypeTable(Tid,type) values(5,"Friend"),(6,"Friend"),(7,"Friend"),(8,"Family"),(9,"Family"),(10,"Friend"),(11,"Family");
+
+SELECT TypeTable.type,AddressBook.firstName 
+FROM AddressBook 
+JOIN TypeTable ON AddressBook.id = TypeTable.Tid 
+WHERE TypeTable.type = 'Family';
+
 
 select * from TypeTable;
 select * from AddressBook;
