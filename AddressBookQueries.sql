@@ -75,6 +75,8 @@ update AddressBook set type="Family" where firstName = "Shri";
 update AddressBook set type="Family" where firstName = "Sagar";
 update AddressBook set type="Friend" where firstName = "Adarsh";
 
+-- Use case 10 find the number of friends and family count in address Book
+select type, count(*) as typeCount from AddressBook Group BY type;
 
 select * from TypeTable;
 select * from AddressBook;
